@@ -63,6 +63,8 @@ describe('searchYouTube', function() {
     searchYouTube({ key: 'API_KEY', query: 'cats', max: 10 }, () => {});
 
     var params = getURLSearchParams(requests[0].url);
+    // console.log ('params')
+    // console.log (params)
     expect(params.key).to.equal('API_KEY');
     expect(params.q).to.equal('cats');
     expect(params.maxResults).to.equal('10');
@@ -81,6 +83,7 @@ describe('searchYouTube', function() {
     xhr.restore();
 
     searchYouTube(options, (data) => {
+      // console.log(data)
       expect(hasSameShape(data, exampleVideoData)).to.be.true;
       done();
     });
