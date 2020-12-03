@@ -11,6 +11,7 @@ var searchYouTube = (options, callback) => {
     videoEmbeddable: true
   })
     .done((data) => {
+      console.log('got data: ', data);
       callback(data.items);
     })
     .fail((data) => {

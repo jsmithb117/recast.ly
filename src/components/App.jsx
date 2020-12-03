@@ -2,7 +2,7 @@ import VideoList from './VideoList.js';
 import exampleVideoData from '../data/exampleVideoData.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
-import searchYouTube from './searchYouTube';
+import searchYouTube from '../lib/searchYouTube.js';
 import YOUTUBE_API_KEY from '../config/youtube.js';
 
 class App extends React.Component {
@@ -15,31 +15,40 @@ class App extends React.Component {
     };
   }
 
+
+  componentDidMount() {
+    //options:
+    //query, max, key
+    searchYouTube({query: 'dogs', max: 5, key: YOUTUBE_API_KEY}, (data) => {
+      this.setState({videos: data.items}, () => console.log(data.items));
+    });
+  }
+
   onVideoClick(video) {
     this.setState({
       currentVideo: video
     });
   }
 
-  onSearchInput(input) {
-    console.log (input);
-    // this.setState({searchQuery: input})
-  }
+  // onSearchInput(input) {
+  //   console.log (input);
+  //   // this.setState({searchQuery: input})
+  // }
 
-  onSearchSubmit() {
-    var options = {
-      // part: 'snippet',
-      // maxResults: 5,
-      // q: this.state.searchQuery
-      query: this.state.searchQuery,
-      max: 5,
-      key: YOUTUBE_API_KEY
-    };
-    // var callback = (videos) => {
-    //   // this.setState(videos: videos);
-    // };
-    searchYouTube(options, callback);
-  }
+  // onSearchSubmit() {
+  //   var options = {
+  //     // part: 'snippet',
+  //     // maxResults: 5,
+  //     // q: this.state.searchQuery
+  //     query: this.state.searchQuery,
+  //     max: 5,
+  //     key: YOUTUBE_API_KEY
+  //   };
+  //   // var callback = (videos) => {
+  //   //   // this.setState(videos: videos);
+  //   // };
+  //   searchYouTube(options, callback);
+  // }
 
   render() {
     return (
