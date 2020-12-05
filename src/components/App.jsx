@@ -15,7 +15,6 @@ class App extends React.Component {
     };
   }
 
-
   componentDidMount() {
     searchYouTube({query: 'dogs', max: 5, key: YOUTUBE_API_KEY}, (data) => {
       this.setState({videos: data});
