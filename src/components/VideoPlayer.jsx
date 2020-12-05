@@ -1,3 +1,5 @@
+import VideoDetails from './VideoDetails.js';
+
 var VideoPlayer = (props) => (
   <div className="video-player">
     <div className="embed-responsive embed-responsive-16by9">
@@ -5,7 +7,7 @@ var VideoPlayer = (props) => (
     </div>
     <div className="video-player-details">
       <h3>{props.video.snippet.title}</h3>
-      <div>{props.video.snippet.description}</div>
+      <div><VideoDetails videoId={props.video.id.videoId}/></div>
     </div>
   </div>
 );

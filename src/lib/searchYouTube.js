@@ -8,18 +8,18 @@ var searchYouTube = (options, callback) => {
     videoEmbeddable: true
   })
     .done((data) => {
-      console.log('got data: ', data);
+      // console.log('got data: ', data);
       callback(data.items);
     })
     .fail((error) => {
       console.error(error.responseText);
     });
 
-  var searchOptions = {
-    key: options.key,
-    q: options.query,
-    maxResults: options.max
-  };
+  // var searchOptions = {
+  //   key: options.key,
+  //   q: options.query,
+  //   maxResults: options.max
+  // };
 };
 
 export default searchYouTube;
