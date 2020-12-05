@@ -9,18 +9,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentVideo: exampleVideoData[0],
       searchQuery: null,
-      videos: exampleVideoData
+      videos: exampleVideoData,
+      currentVideo: exampleVideoData[0]
     };
   }
 
 
   componentDidMount() {
-    //options:
-    //query, max, key
     searchYouTube({query: 'dogs', max: 5, key: YOUTUBE_API_KEY}, (data) => {
-      this.setState({videos: data.items}, () => console.log(data.items));
+      this.setState({videos: data}, () => console.log(data));
     });
   }
 
@@ -30,32 +28,26 @@ class App extends React.Component {
     });
   }
 
-  // onSearchInput(input) {
-  //   console.log (input);
-  //   // this.setState({searchQuery: input})
-  // }
+  onSearchInput(input) {
+    console.log (input);
+    this.setState({searchQuery: input});
+  }
 
-  // onSearchSubmit() {
-  //   var options = {
-  //     // part: 'snippet',
-  //     // maxResults: 5,
-  //     // q: this.state.searchQuery
-  //     query: this.state.searchQuery,
-  //     max: 5,
-  //     key: YOUTUBE_API_KEY
-  //   };
-  //   // var callback = (videos) => {
-  //   //   // this.setState(videos: videos);
-  //   // };
-  //   searchYouTube(options, callback);
-  // }
+  onSearchSubmit() {
+    var options = {
+      query: this.state.searchQuery,
+      max: 5,
+      key: YOUTUBE_API_KEY
+    };
+    searchYouTube(options, callback);
+  }
 
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> <Search /></h5></div>
+            <div><h5><em>search</em> <Search onVideoClick={this.onVideoClick} onSearchInput={this.onSearchInput}/></h5></div>
           </div>
         </nav>
         <div className="row">
