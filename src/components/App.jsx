@@ -18,7 +18,7 @@ class App extends React.Component {
 
   componentDidMount() {
     searchYouTube({query: 'dogs', max: 5, key: YOUTUBE_API_KEY}, (data) => {
-      this.setState({videos: data}, () => console.log(data));
+      this.setState({videos: data});
     });
   }
 
@@ -29,8 +29,7 @@ class App extends React.Component {
   }
 
   onSearchInput(input) {
-    console.log (input);
-    this.setState({searchQuery: input});
+    this.setState({searchQuery: input.target.value});
   }
 
   onSearchSubmit() {
@@ -38,6 +37,9 @@ class App extends React.Component {
       query: this.state.searchQuery,
       max: 5,
       key: YOUTUBE_API_KEY
+    };
+    var callback = (data) => {
+      this.setState({videos: data});
     };
     searchYouTube(options, callback);
   }
@@ -47,7 +49,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> <Search onVideoClick={this.onVideoClick} onSearchInput={this.onSearchInput}/></h5></div>
+            <div><h5><em>search</em> <Search onSearchSubmit={this.onSearchSubmit.bind(this)} onSearchInput={this.onSearchInput.bind(this)}/></h5></div>
           </div>
         </nav>
         <div className="row">
